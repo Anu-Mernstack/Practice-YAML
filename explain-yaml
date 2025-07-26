@@ -1,0 +1,60 @@
+1. name:
+Purpose: Names the entire workflow (what you’ll see in the Actions tab).
+
+name: Deploy Website
+ You can name it anything (e.g., "CI Test", "Build & Deploy", etc.).
+
+ 2. on:
+Purpose: Defines when the workflow should run.
+
+Example:
+on:
+  push:
+    branches: [ main ]
+ This means: “Run this workflow when someone pushes code to the main branch.”
+
+Other options:
+on: 
+  pull_request:
+    branches: [ main ]
+  Triggers when a pull request is made to the main branch.
+
+You can also combine:
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+      branches: [ main ]
+      
+3. jobs:
+Purpose: Contains one or more jobs (like build, test, deploy).
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+deploy: Job name
+
+runs-on: Chooses the OS runner (e.g., ubuntu-latest, windows-latest, macos-latest)
+
+4. steps:
+Purpose: A sequence of steps the job will perform.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+Each step usually has:
+
+name: Human-readable name
+
+uses: Reusable GitHub Action (like actions/checkout)
+
+run: Shell command to execute
+
+ 5. run:
+Purpose: Runs shell commands in that step.
+      - name: Run deploy script
+        run: echo "Deploying my website"
+
+You can run any shell commands here:
+        run: |
+          echo "Starting deployment"
+          date
+          ls -l
